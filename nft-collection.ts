@@ -20,7 +20,6 @@ import {
   _symbol,
   _update,
   _transferFrom,
-  _transfer,
 } from './NFT-internals';
 import { setOwner, onlyOwner, ownerAddress } from '../utilities/ownership';
 import {
@@ -214,15 +213,6 @@ export function transferFrom(binaryArgs: StaticArray<u8>): void {
     .nextU256()
     .expect('tokenId argument is missing or invalid');
   _transferFrom(from, to, tokenId);
-}
-
-export function transfer(binaryArgs: StaticArray<u8>): void {
-  const args = new Args(binaryArgs);
-  const to = args.nextString().expect('to argument is missing or invalid');
-  const tokenId = args
-    .nextU256()
-    .expect('tokenId argument is missing or invalid');
-  _transfer(to, tokenId);
 }
 
 export function currentSupply(
